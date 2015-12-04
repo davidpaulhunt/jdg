@@ -1,0 +1,28 @@
+{
+  "name": "jdg",
+  "version": "1.0.0",
+  "description": "A set of helpers to compare results and expected results during testing.",
+  "main": "judge.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/davidpaulhunt/jdg"
+  },
+  "keywords": [
+    "test",
+    "comparisons",
+    "helpers"
+  ],
+  "author": "David Hunt (davidpaulhunt)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/davidpaulhunt/jdg/issues"
+  },
+  "homepage": "https://github.com/davidpaulhunt/jdg",
+  "devDependencies": {
+    "mocha": "2.3.x",
+    "should": "7.1.x"
+  }
+}
