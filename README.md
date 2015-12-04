@@ -57,3 +57,7 @@ function updateUser(user, attrs, opts) {
   }
 }
 ```
+
+## Issues
+
+If you're using jdg and find a problem, feel free to [report](https://github.com/davidpaulhunt/jdg/issues/new) the issue here on Github. This helps determine if an issue has already been reported and if there is a fix already in progress.
