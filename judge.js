@@ -163,3 +163,6 @@ judge.arraysAreAlike = function(array, target, sortable) {
 
   return isAlike;
 };
+
+judge.is = is;
+judge.get = get;

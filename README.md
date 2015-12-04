@@ -3,7 +3,7 @@ A simple set of tools for comparing given and expected results. It is meant to b
 
 ## Installation
 
-To use jdg through your project:
+To use jdg throughout your project:
 
 ```js
 $ npm install --save jdg
@@ -17,7 +17,7 @@ $ npm install jdg
 
 ## Examples
 
-These examples use mocha and shouldjs.
+A testing example using mocha and shouldjs:
 
 ```js
 var jdg = require('jdg');
@@ -29,4 +29,31 @@ describe('GET /users', function() {
     jdg.isInArray(users, {name: 'Bob', id: 4}).should.equal(true);
   });
 });
+```
+
+And an example using jdg outside of your testing suite:
+
+```js
+var jdg = require('jdg');
+
+function updateUser(user, attrs, opts) {
+  attrs.forEach(function(attr) {
+    if (jdg.isInArray(user.baseAttrs, attr)) {
+      // do something
+    }
+  });
+}
+```
+
+Jdg's underlying helpers `is` and `get` are also exposed for use:
+
+```js
+function updateUser(user, attrs, opts) {
+  if (jdg.is.missing(user)) {
+    // throw some error
+  } else {
+    var userAttrs = judge.get.keys(user);
+    // do something
+  }
+}
 ```
