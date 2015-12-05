@@ -151,4 +151,22 @@ describe('Is', function() {
       is.array(foo).should.equal(true);
     });
   });
+
+  describe('empty()', function() {
+    it('[1] should return false', function() {
+      is.empty([1]).should.equal(false);
+    });
+
+    it('[1,3,78] should return false', function() {
+      is.empty([1,3,78]).should.equal(false);
+    });
+
+    it('[] should return true', function() {
+      is.empty([]).should.equal(true);
+    });
+
+    it('new Array() should return true', function() {
+      is.empty(new Array()).should.equal(true);
+    });
+  });
 });

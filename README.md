@@ -1,4 +1,4 @@
-# jdg v1.0.1 [![Build Status](https://api.travis-ci.org/davidpaulhunt/jdg.svg?branch=master)](http://travis-ci.org/davidpaulhunt/jdg)
+# jdg v1.0.2 [![Build Status](https://api.travis-ci.org/davidpaulhunt/jdg.svg?branch=master)](http://travis-ci.org/davidpaulhunt/jdg)
 
 A simple set of tools for comparing given and expected results. It is meant to be semantically clear and concise, returning a simple truthy response. This is ideal for testing.
 
@@ -53,7 +53,7 @@ function updateUser(user, attrs, opts) {
   if (jdg.is.missing(user)) {
     // throw some error
   } else {
-    var userAttrs = judge.get.keys(user);
+    var userAttrs = jdg.get.keys(user);
     // do something
   }
 }
