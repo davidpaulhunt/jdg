@@ -1,7 +1,7 @@
 {
   "name": "jdg",
   "version": "1.0.1",
-  "description": "A set of helpers to compare results and expected results during testing.",
+  "description": "A simple set of tools for comparing given and expected results. It is meant to be semantically clear and concise, returning a simple truthy response. This is ideal for testing.",
   "main": "judge.js",
   "scripts": {
     "test": "mocha"
