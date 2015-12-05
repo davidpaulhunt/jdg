@@ -67,8 +67,8 @@ describe('jdg', function() {
       jdg.hasKeys({foo: 'bar'}, ['thing']).should.equal(false);
     });
 
-    it('{foo: "bar", thing: "stuff"}, ["thing"], null, true should return false', function() {
-      jdg.hasKeys({foo: 'bar', thing: 'stuff'}, ['thing'], null, true).should.equal(false);
+    it('{foo: "bar", thing: "stuff"}, ["thing"], true should return false', function() {
+      jdg.hasKeys({foo: 'bar', thing: 'stuff'}, ['thing'], true).should.equal(false);
     });
 
     it('{foo: "bar"}, ["foo"] should return true', function() {
@@ -83,8 +83,8 @@ describe('jdg', function() {
       jdg.hasKeys({foo: 'bar', thing: 'stuff'}, ['foo', 'thing']).should.equal(true);
     });
 
-    it('{foo: "bar", thing: "stuff"}, ["foo", "thing"], null, true should return true', function() {
-      jdg.hasKeys({foo: 'bar', thing: 'stuff'}, ['foo', 'thing'], null, true).should.equal(true);
+    it('{foo: "bar", thing: "stuff"}, ["foo", "thing"], true should return true', function() {
+      jdg.hasKeys({foo: 'bar', thing: 'stuff'}, ['foo', 'thing'], true).should.equal(true);
     });
   });
 

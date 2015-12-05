@@ -38,20 +38,16 @@ jdg.hasKey = function(object, key, arraysAreSortable) {
     return false;
   }
 
-  if (is.missing(arraysAreSortable)) {
-    arraysAreSortable = true;
-  }
-
-  return jdg.isInArray(get.keys(object), key, arraysAreSortable);
+  return is.present(object[key]);
 }
 
-jdg.hasKeys = function(object, keys, arraysAreSortable, exact) {
+jdg.hasKeys = function(object, keys, exact, unsortable) {
   if (!is.object(object) || !is.array(keys) || is.empty(keys)) {
     return false;
   }
 
-  if (is.missing(arraysAreSortable)) {
-    arraysAreSortable = true;
+  if (is.missing(unsortable)) {
+    unsortable = false;
   }
 
   if (is.missing(exact)) {
@@ -59,11 +55,19 @@ jdg.hasKeys = function(object, keys, arraysAreSortable, exact) {
   }
 
   var found = 0;
-  for (var i = 0; i < keys.length; i++) {
-    if (jdg.hasKey(object, keys[i], arraysAreSortable)) {
-      found++;
-    } else {
-      break;
+  if (unsortable) {
+    keys.forEach(function(key){
+      if (jdg.hasKey(object, key)) {
+        found++;
+      }
+    });
+  } else {
+    for (var i = 0; i < keys.length; i++) {
+      if (jdg.hasKey(object, keys[i])) {
+        found++;
+      } else {
+        break;
+      }
     }
   }
 
@@ -151,33 +155,41 @@ jdg.sortArray = function(array){
   return results;
 };
 
-jdg.objectsAreAlike = function(object, keys) {
-  if (!is.object(object)) {
+jdg.objectsAreAlike = function(object, source, exact) {
+  if (!is.object(object) || !is.object(source)) {
     return false;
+  }
+
+  if (is.missing(exact)) {
+    exact = false;
   }
 
   var isAlike = true;
 
-  for (var key in keys) {
+  for (var key in source) {
     if (isAlike == false) { break; }
     if (is.missing(key)) { continue; }
     if (is.missing(object[key])) { isAlike = false; break; }
 
-    if (is.object(keys[key])) {
-      isAlike = jdg.objectsAreAlike(object[key], keys[key]);
-    } else if (is.array(keys[key])) {
-      isAlike = jdg.arraysAreAlike(object[key], keys[key]);
-    } else if (object[key] != keys[key]) {
+    if (is.object(source[key])) {
+      isAlike = jdg.objectsAreAlike(object[key], source[key]);
+    } else if (is.array(source[key])) {
+      isAlike = jdg.arraysAreAlike(object[key], source[key]);
+    } else if (object[key] != source[key]) {
       isAlike = false;
       break;
     }
   }
 
+  if (exact && isAlike) {
+    isAlike = get.keys(object).length == get.keys(source).length;
+  }
+
   return isAlike;
 };
 
-jdg.arraysAreAlike = function(array, target, sortable) {
-  if (!is.array(array) || !is.array(target)) {
+jdg.arraysAreAlike = function(array, source, sortable) {
+  if (!is.array(array) || !is.array(source)) {
     return false;
   }
 
@@ -189,11 +201,11 @@ jdg.arraysAreAlike = function(array, target, sortable) {
 
   if (sortable) {
     array = jdg.sortArray(array);
-    target = jdg.sortArray(target);
+    source = jdg.sortArray(source);
 
     var i = 0;
-    while (isAlike == true && i < target.length) {
-      isAlike = jdg.isInArray(array, target[i]);
+    while (isAlike == true && i < source.length) {
+      isAlike = jdg.isInArray(array, source[i]);
       i++;
     }
   } else {
@@ -201,8 +213,12 @@ jdg.arraysAreAlike = function(array, target, sortable) {
       if (!isAlike) {
         break;
       }
-      isAlike = (array[i] == target[i]);
+      isAlike = (array[i] == source[i]);
     }
+  }
+
+  if (isAlike) {
+    isAlike = array.length == source.length;
   }
 
   return isAlike;

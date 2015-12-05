@@ -1,4 +1,5 @@
 # jdg v1.0.2 [![Build Status](https://api.travis-ci.org/davidpaulhunt/jdg.svg?branch=master)](http://travis-ci.org/davidpaulhunt/jdg)
+> Right or Wrong. Yes or No. True or False. Simplified.
 
 A simple set of tools for comparing given and expected results. It is meant to be semantically clear and concise, returning a simple truthy response. This is ideal for testing.
 
@@ -58,6 +59,9 @@ function updateUser(user, attrs, opts) {
   }
 }
 ```
+
+## Documentation
+
 
 ## Issues
 
